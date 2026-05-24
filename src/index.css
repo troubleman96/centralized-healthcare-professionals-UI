@@ -1,0 +1,308 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Green and White (Light Theme) variables */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --bg-app: #F4FBF8;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #E4F4ED;
+  --bg-muted: #EBF2EE;
+  --color-border: #D2E3DB;
+  --text-primary: #0C1914;
+  --text-muted: #435E54;
+  --color-brand: #059669;
+  --color-brand-dark: #047857;
+  --color-brand-light: #10B981;
+  --color-brand-bg: rgba(5, 150, 105, 0.08);
+  --shimmer-loader: linear-gradient(90deg, #E2F0EA 25%, #F1FAF6 50%, #E2F0EA 75%);
+  --scrollbar-track-color: #F4FBF8;
+  --scrollbar-thumb-color: #C1D2CA;
+  --grid-line-color: rgba(5, 150, 105, 0.04);
+}
+
+:root.dark {
+  /* Dark and Green (Dark Theme) variables */
+  --bg-app: #080D16;
+  --bg-card: #0F172A;
+  --bg-card-hover: #1E293B;
+  --bg-muted: #111A2E;
+  --color-border: #1E293B;
+  --text-primary: #F1F5F9;
+  --text-muted: #94A3B8;
+  --color-brand: #10B981;
+  --color-brand-dark: #059669;
+  --color-brand-light: #34D399;
+  --color-brand-bg: rgba(16, 185, 129, 0.1);
+  --shimmer-loader: linear-gradient(90deg, #1E293B 25%, #334155 50%, #1E293B 75%);
+  --scrollbar-track-color: #080D16;
+  --scrollbar-thumb-color: #1E293B;
+  --grid-line-color: rgba(255, 255, 255, 0.02);
+}
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  /* Dynamic Brand and Clinical SaaS colors */
+  --color-brand: var(--color-brand);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-light: var(--color-brand-light);
+  --color-brand-bg: var(--color-brand-bg);
+
+  --color-panel-dark: var(--bg-card);
+  --color-border-dark: var(--color-border);
+  --color-surface-dark: var(--bg-app);
+}
+
+/* Base custom definitions */
+@layer base {
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+}
+
+/* Base CSS overrides to transparently adapt hardcoded Tailwind v3 and v4 hex values in Light Mode */
+:root:not(.dark) {
+  /* Substring class matchers for backgrounds */
+  [class*="bg-[#080D16]"],
+  [class*="bg-[#0b0f19]"],
+  [class*="bg-[#070b12]"],
+  [class*="bg-[#070B12]"],
+  [class*="bg-[#0B0F19]"],
+  [class*="bg-gray-950"],
+  [class*="bg-surface-dark"],
+  [class*="bg-slate-950"] {
+    background-color: var(--bg-app) !important;
+  }
+
+  [class*="bg-[#0F172A]"],
+  [class*="bg-[#0f172a]"],
+  [class*="bg-[#0B1527]"],
+  [class*="bg-[#0b1527]"],
+  [class*="bg-[#111A2E]"],
+  [class*="bg-[#111a2e]"],
+  [class*="bg-[#1E293B]"],
+  [class*="bg-[#1e293b]"],
+  [class*="bg-gray-900"],
+  [class*="bg-panel-dark"],
+  [class*="bg-slate-900"] {
+    background-color: var(--bg-card) !important;
+  }
+
+  /* Shimmer background */
+  [class*="shimmer-bg"] {
+    background: var(--shimmer-loader) !important;
+  }
+
+  /* Specific alerts exceptions */
+  [class*="bg-[#1E150B]"],
+  [class*="bg-[#1e150b]"] {
+    background-color: #FEF3C7 !important; /* Amber-100 */
+    border-color: #D97706 !important;
+    color: #B45309 !important;
+  }
+
+  [class*="bg-[#0B1527]"],
+  [class*="bg-[#0b1527]"] {
+    background-color: #EFF6FF !important; /* Blue-50 */
+    border-color: #3B82F6 !important;
+    color: #1D4ED8 !important;
+  }
+
+  /* Form controls reset */
+  input, select, textarea {
+    background-color: var(--bg-muted) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--color-border) !important;
+  }
+
+  /* Text color corrections for light readability */
+  [class*="text-white"],
+  [class*="text-gray-50"],
+  [class*="text-gray-100"],
+  [class*="text-gray-200"],
+  [class*="text-[#F1F5F9]"],
+  [class*="text-[#f1f5f9]"],
+  [class*="text-slate-50"],
+  [class*="text-slate-100"],
+  [class*="text-slate-200"] {
+    color: var(--text-primary) !important;
+  }
+
+  [class*="text-gray-300"],
+  [class*="text-gray-400"],
+  [class*="text-[#94A3B8]"],
+  [class*="text-[#94a3b8]"],
+  [class*="text-slate-300"],
+  [class*="text-slate-400"] {
+    color: var(--text-muted) !important;
+  }
+
+  [class*="text-gray-500"],
+  [class*="text-slate-500"] {
+    color: #496E5F !important;
+  }
+
+  /* Borders translation */
+  [class*="border-gray-800"],
+  [class*="border-gray-905"],
+  [class*="border-gray-850"],
+  [class*="border-gray-900"],
+  [class*="border-slate-800"],
+  [class*="border-slate-700"] {
+    border-color: var(--color-border) !important;
+  }
+
+  /* Hero Section background overlay colors */
+  [class*="from-[#0F172A]"],
+  [class*="from-[#0f172a]"],
+  [class*="via-[#101E35]"],
+  [class*="via-[#101e35]"],
+  [class*="to-[#0F172A]"],
+  [class*="to-[#0f172a]"] {
+    --tw-gradient-from: #E6F4EE !important;
+    --tw-gradient-to: #E6F4EE !important;
+    --tw-gradient-stops: #E6F4EE, #E6F4EE !important;
+    background-image: none !important;
+    background-color: #E6F4EE !important;
+  }
+
+  /* Brand pills and badge enhancements in light view */
+  [class*="bg-emerald-500/10"],
+  [class*="bg-[#10B981]/15"] {
+    background-color: var(--color-brand-bg) !important;
+    color: var(--color-brand) !important;
+  }
+
+  /* Active selections / tabs */
+  [class*="text-[#10B981]"] {
+    color: var(--color-brand) !important;
+  }
+
+  [class*="bg-gray-900/50"] {
+    background-color: var(--bg-muted) !important;
+  }
+
+  /* Hover modes */
+  [class*="hover:bg-gray-800"]:hover,
+  [class*="hover:bg-gray-850"]:hover,
+  [class*="hover:bg-slate-800"]:hover,
+  [class*="hover:bg-[#1E293B]"]:hover,
+  [class*="hover:bg-[#1e293b]"]:hover {
+    background-color: var(--bg-card-hover) !important;
+  }
+}
+
+/* Animations and Special Transitions */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0)  scale(1); }
+}
+
+@keyframes pageFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.4); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(24px) translateY(-10px); }
+  to   { opacity: 1; transform: translateX(0) translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(24px); }
+}
+
+@keyframes savedFlash {
+  0%   { background-color: rgba(16, 185, 129, 0.2); }
+  50%  { background-color: rgba(16, 185, 129, 0.05); }
+  100% { background-color: transparent; }
+}
+
+/* Classes referencing animations */
+.animate-fade-up {
+  animation: fadeUp 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-card-in {
+  animation: cardIn 250ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-page-fade {
+  animation: pageFade 150ms ease both;
+}
+
+.animate-pulse-dot {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.animate-toast-in {
+  animation: toastIn 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-saved-flash {
+  animation: savedFlash 800ms ease both;
+}
+
+/* Customized scrollbars for a real SaaS openrouter feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand);
+}
+
+/* Repeat cross-grid background for a gorgeous high-tech medical SaaS hero panel */
+.bg-grid-pattern {
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 39px, var(--grid-line-color) 39px, var(--grid-line-color) 40px
+  ),
+  repeating-linear-gradient(
+    90deg, transparent, transparent 39px, var(--grid-line-color) 39px, var(--grid-line-color) 40px
+  );
+  background-size: 40px 40px;
+}
+
+/* Shimmer Loading skeleton styling */
+.shimmer-bg {
+  background: var(--shimmer-loader);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}

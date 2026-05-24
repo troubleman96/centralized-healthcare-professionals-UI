@@ -1,0 +1,6 @@
+{
+  "name": "MNH Smart Healthcare Directory",
+  "description": "Real-time medical specialist availability, campus mapping, and appointment booking system for Muhimbili National Hospital (MNH) in Dar es Salaam, Tanzania.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
